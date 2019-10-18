@@ -22,7 +22,8 @@ int main(int argc , char *argv[])
 	
 	int sockfd, newsockfd, portno, n;
 	char buffer[255];
-	struct sockaddr_in serv_addr, ali_addr, socklen_t client;
+	struct sockaddr_in serv_addr, cli_addr;
+	socklen_t client;
 	sockfd=socket(AF_INET, SOCK_STREAM,0);
 	if(sockfd<0)
 	{
@@ -43,7 +44,7 @@ int main(int argc , char *argv[])
 	listen(sockfd,5);
 	
 	client=sizeof(cli_addr);
-	newsockfd=accept(sockfd,(struct sockaddr*)&cli_add,&client);
+	newsockfd=accept(sockfd,(struct sockaddr*)&cli_addr,&client);
 	
 	if(newsockfd<0)
 	{
@@ -53,7 +54,7 @@ int main(int argc , char *argv[])
 	while(1)
 	{
 	        bzero(buffer,255);
-	        n=read(newsckfd,buffer,255);
+	        n=read(newsockfd,buffer,255);
 	        if(n<0)
 	        {
 	                error("Errror on reading");
